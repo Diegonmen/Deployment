@@ -1,0 +1,40 @@
+<%@ tag language="java" body-content="empty" %>
+
+<%-- Taglibs --%>
+
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+
+<%-- Attributes --%> 
+
+<%@ attribute name="message" required="true" %>
+<%@ attribute name="value" required="true" %>
+
+<%@ attribute name="box" required="false" %>
+<%@ attribute name="isLink" required="false" %>
+
+<%-- Definition --%>
+
+<b><spring:message code="${message}" />:</b>
+<jstl:choose>
+	<jstl:when test="${box == true}">
+		<br />
+		<div class="box"><jstl:out value="${value}"/></div>
+	</jstl:when>
+	<jstl:otherwise>
+		<jstl:choose>
+			<jstl:when test="${isLink}">
+				<a href="<jstl:out value="${value}"/>"><jstl:out value="${value}"/></a>
+			</jstl:when>
+			<jstl:otherwise>
+				<jstl:out value="${value}"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</jstl:otherwise>
+</jstl:choose>
+<br />
